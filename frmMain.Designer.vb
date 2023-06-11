@@ -32,6 +32,7 @@ Partial Class frmMain
         Me.lblDisclaimer = New System.Windows.Forms.Label()
         Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
         Me.lblMainTitle = New System.Windows.Forms.Label()
+        Me.btnHelp = New System.Windows.Forms.Button()
         CType(Me.trkMines, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -121,11 +122,22 @@ Partial Class frmMain
         Me.lblMainTitle.TabIndex = 13
         Me.lblMainTitle.Text = "MINESWEEPER"
         '
+        'btnHelp
+        '
+        Me.btnHelp.Font = New System.Drawing.Font("Bauhaus 93", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point)
+        Me.btnHelp.Location = New System.Drawing.Point(497, 9)
+        Me.btnHelp.Name = "btnHelp"
+        Me.btnHelp.Size = New System.Drawing.Size(25, 25)
+        Me.btnHelp.TabIndex = 14
+        Me.btnHelp.Text = "?"
+        Me.btnHelp.UseVisualStyleBackColor = True
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(534, 711)
+        Me.Controls.Add(Me.btnHelp)
         Me.Controls.Add(Me.lblMainTitle)
         Me.Controls.Add(Me.lblDisclaimer)
         Me.Controls.Add(Me.lblMineCount)
@@ -155,4 +167,5 @@ Partial Class frmMain
     Friend WithEvents trkGridWidth As TrackBar
     Friend WithEvents trkGridHeight As TrackBar
     Friend WithEvents lblMainTitle As Label
+    Friend WithEvents btnHelp As Button
 End Class

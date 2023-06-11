@@ -1,8 +1,9 @@
 ﻿Imports System.IO
+Imports Microsoft.VisualBasic.FileIO
 
 Public Class frmLeaderboard
     Private Sub frmLeaderboard_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        For i = 1 To 2
+        For i = 1 To 3
             lstLeaderboard.Items.Clear()
             loadLB()
         Next i

@@ -205,11 +205,6 @@ Public Class frmMain
         File.WriteAllLines(filepath, scores)
     End Sub
 
-    Private Sub btnLeaderboard_Click(sender As Object, e As EventArgs) Handles btnLeaderboard.Click
-        frmLeaderboard.Show()
-        Me.Hide()
-    End Sub
-
     Private Sub trkMines_Scroll(sender As Object, e As EventArgs) Handles trkMines.Scroll
         Dim mineCount = "Mine Count: " & trkMines.Value.ToString
         lblMineCount.Text = mineCount
@@ -232,5 +227,14 @@ Public Class frmMain
                 lblMineCount.ForeColor = Color.Black
                 lblDisclaimer.ForeColor = Color.Black
         End Select
+    End Sub
+
+    Private Sub btnHelp_Click(sender As Object, e As EventArgs) Handles btnHelp.Click
+        frmHelp.Show()
+        Me.Hide()
+    End Sub
+    Private Sub btnLeaderboard_Click(sender As Object, e As EventArgs) Handles btnLeaderboard.Click
+        frmLeaderboard.Show()
+        Me.Hide()
     End Sub
 End Class
