@@ -1,14 +1,12 @@
 ﻿Imports System.IO
-Imports System.Linq.Expressions
-Imports System.Reflection.Emit
 Public Class frmMain
-    Private Const gridSize As Integer = 10
-    Private mineCount As Integer = 10
-    Private buttons(gridSize - 1, gridSize - 1) As Button
-    Private mines(gridSize - 1, gridSize - 1) As Boolean
-    Private uncoveredTiles As Integer
-    Private gameTimer As Timer
-    Private restartCooldown As DateTime
+    Const gridSize As Integer = 10
+    Dim mineCount As Integer = 10
+    Dim buttons(gridSize - 1, gridSize - 1) As Button
+    Dim mines(gridSize - 1, gridSize - 1) As Boolean
+    Dim uncoveredTiles As Integer
+    Dim gameTimer As Timer
+    Dim restartCooldown As DateTime
 
     Private Sub frmMain(sender As Object, e As EventArgs) Handles MyBase.Load
         InitialiseButtons()
@@ -230,10 +228,10 @@ Public Class frmMain
     End Sub
 
     Private Sub btnHelp_Click(sender As Object, e As EventArgs) Handles btnHelp.Click
-        frmHelp.Show()
         Me.Hide()
     End Sub
     Private Sub btnLeaderboard_Click(sender As Object, e As EventArgs) Handles btnLeaderboard.Click
+        refreshLB()
         frmLeaderboard.Show()
         Me.Hide()
     End Sub

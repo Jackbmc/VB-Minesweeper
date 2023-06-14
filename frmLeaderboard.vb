@@ -1,12 +1,8 @@
 ﻿Imports System.IO
-Imports Microsoft.VisualBasic.FileIO
 
 Public Class frmLeaderboard
     Private Sub frmLeaderboard_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        For i = 1 To 3
-            lstLeaderboard.Items.Clear()
-            loadLB()
-        Next i
+        refreshLB()
     End Sub
 
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
@@ -15,7 +11,7 @@ Public Class frmLeaderboard
     End Sub
 
 
-    Private Sub loadLB()
+    Public Sub loadLB()
         Dim filepath As String = "lb.txt"
 
         If File.Exists(filepath) Then
