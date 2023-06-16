@@ -11,28 +11,24 @@ Public Class frmMain
     Private Sub frmMain(sender As Object, e As EventArgs) Handles MyBase.Load
         InitialiseButtons()
         btnStart.Text = "Start"
-        Dim mineCount = "Mine Count: " & trkMines.Value.ToString
-        lblMineCount.Text = mineCount
-        firstGame = False
     End Sub
 
     Private Sub InitialiseButtons()
         For x As Integer = 0 To gridSize - 1
             For y As Integer = 0 To gridSize - 1
                 Dim newButton As New Button With {
-                    .Size = New Size(40, 40),
-                    .Location = New Point(40 * x, 40 * y)
+                    .Size = New Size(35, 35),
+                    .Location = New Point(35 * x, 35 * y)
                 }
                 AddHandler newButton.MouseUp, AddressOf Button_MouseUp
-                gamePanel.Controls.Add(newButton)
+                pnlGrid.Controls.Add(newButton)
                 buttons(x, y) = newButton
             Next
         Next
     End Sub
 
     Private Sub btnStart_Click(sender As Object, e As EventArgs) Handles btnStart.Click
-        mineCount = trkMines.Value
-        If usernameTextBox.Text.Length <> 3 Then
+        If txtName.Text.Length <> 3 Then
             MessageBox.Show("Username must be 3 characters long.")
             Return
         End If
@@ -42,7 +38,7 @@ Public Class frmMain
             Return
         End If
 
-        timerLabel.Text = "00:00:00" ' Reset the timer to 0
+        lblTime.Text = "00:00:00" ' Reset the timer to 0
 
         InitialiseMines()
         uncoveredTiles = 0
@@ -54,7 +50,6 @@ Public Class frmMain
 
         gameTimer.Start()
         btnStart.Text = "Restart"
-        firstGame = True
     End Sub
 
     Private Sub InitialiseMines()
@@ -87,7 +82,7 @@ Public Class frmMain
     End Sub
 
     Private Sub GameTimer_Tick(sender As Object, e As EventArgs)
-        timerLabel.Text = TimeSpan.FromSeconds(TimeSpan.Parse(timerLabel.Text).TotalSeconds + 1).ToString()
+        lblTime.Text = TimeSpan.FromSeconds(TimeSpan.Parse(lblTime.Text).TotalSeconds + 1).ToString()
     End Sub
 
     Private Sub Button_MouseUp(sender As Object, e As MouseEventArgs)
@@ -104,7 +99,7 @@ Public Class frmMain
             If mines(x, y) Then
                 gameTimer.Stop()
                 restartCooldown = DateTime.Now
-                MessageBox.Show($"Game over! You lost in {timerLabel.Text}.")
+                MessageBox.Show($"Game over! You lost in {lblTime.Text}.")
             Else
                 RevealEmptyCells(x, y)
             End If
@@ -114,8 +109,8 @@ Public Class frmMain
 
         If gridSize * gridSize - uncoveredTiles = mineCount Then
             gameTimer.Stop()
-            SavePlayerResult(usernameTextBox.Text, timerLabel.Text)
-            MessageBox.Show($"Congratulations! You won in {timerLabel.Text}.")
+            SavePlayerResult(txtName.Text, lblTime.Text)
+            MessageBox.Show($"Congratulations! You won in {lblTime.Text}.")
         End If
     End Sub
 
@@ -201,30 +196,6 @@ Public Class frmMain
         End If
 
         File.WriteAllLines(filepath, scores)
-    End Sub
-
-    Private Sub trkMines_Scroll(sender As Object, e As EventArgs) Handles trkMines.Scroll
-        Dim mineCount = "Mine Count: " & trkMines.Value.ToString
-        lblMineCount.Text = mineCount
-
-        Select Case trkMines.Value
-            Case 11 To 19
-                lblDisclaimer.Text = "10 is recommended."
-                lblMineCount.ForeColor = Color.Orange
-                lblDisclaimer.ForeColor = Color.Orange
-            Case 20 To 39
-                lblDisclaimer.Text = "You made it harder."
-                lblMineCount.ForeColor = Color.OrangeRed
-                lblDisclaimer.ForeColor = Color.OrangeRed
-            Case 40 To 50
-                lblDisclaimer.Text = "Why did you do that?"
-                lblMineCount.ForeColor = Color.Red
-                lblDisclaimer.ForeColor = Color.Red
-            Case Else
-                lblDisclaimer.Text = ""
-                lblMineCount.ForeColor = Color.Black
-                lblDisclaimer.ForeColor = Color.Black
-        End Select
     End Sub
 
     Private Sub btnHelp_Click(sender As Object, e As EventArgs) Handles btnHelp.Click

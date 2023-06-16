@@ -24,51 +24,55 @@ Partial Class frmLeaderboard
     Private Sub InitializeComponent()
         Me.lstLeaderboard = New System.Windows.Forms.ListBox()
         Me.btnBack = New System.Windows.Forms.Button()
-        Me.lblLBTitle = New System.Windows.Forms.Label()
+        Me.lblTitle = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'lstLeaderboard
         '
         Me.lstLeaderboard.BackColor = System.Drawing.SystemColors.Control
         Me.lstLeaderboard.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.lstLeaderboard.Font = New System.Drawing.Font("Bauhaus 93", 26.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point)
+        Me.lstLeaderboard.Font = New System.Drawing.Font("Unispace", 13.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point)
         Me.lstLeaderboard.FormattingEnabled = True
-        Me.lstLeaderboard.ItemHeight = 39
-        Me.lstLeaderboard.Location = New System.Drawing.Point(56, 130)
+        Me.lstLeaderboard.ItemHeight = 28
+        Me.lstLeaderboard.Location = New System.Drawing.Point(90, 89)
+        Me.lstLeaderboard.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.lstLeaderboard.Name = "lstLeaderboard"
-        Me.lstLeaderboard.Size = New System.Drawing.Size(433, 468)
+        Me.lstLeaderboard.Size = New System.Drawing.Size(450, 616)
         Me.lstLeaderboard.TabIndex = 0
         '
         'btnBack
         '
-        Me.btnBack.Font = New System.Drawing.Font("Bauhaus 93", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point)
-        Me.btnBack.Location = New System.Drawing.Point(447, 676)
+        Me.btnBack.Font = New System.Drawing.Font("Unispace", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point)
+        Me.btnBack.Location = New System.Drawing.Point(514, 759)
+        Me.btnBack.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.btnBack.Name = "btnBack"
-        Me.btnBack.Size = New System.Drawing.Size(75, 23)
+        Me.btnBack.Size = New System.Drawing.Size(86, 31)
         Me.btnBack.TabIndex = 1
         Me.btnBack.Text = "Back"
         Me.btnBack.UseVisualStyleBackColor = True
         '
-        'lblLBTitle
+        'lblTitle
         '
-        Me.lblLBTitle.AutoSize = True
-        Me.lblLBTitle.Font = New System.Drawing.Font("Bauhaus 93", 36.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point)
-        Me.lblLBTitle.ForeColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(3, Byte), Integer), CType(CType(217, Byte), Integer))
-        Me.lblLBTitle.Location = New System.Drawing.Point(100, 9)
-        Me.lblLBTitle.Name = "lblLBTitle"
-        Me.lblLBTitle.Size = New System.Drawing.Size(343, 54)
-        Me.lblLBTitle.TabIndex = 2
-        Me.lblLBTitle.Text = "LEADERBOARD"
+        Me.lblTitle.AutoSize = True
+        Me.lblTitle.Font = New System.Drawing.Font("Unispace", 36.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point)
+        Me.lblTitle.ForeColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(3, Byte), Integer), CType(CType(217, Byte), Integer))
+        Me.lblTitle.Location = New System.Drawing.Point(90, 9)
+        Me.lblTitle.Name = "lblTitle"
+        Me.lblTitle.Size = New System.Drawing.Size(437, 72)
+        Me.lblTitle.TabIndex = 2
+        Me.lblTitle.Text = "LEADERBOARD"
+        Me.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'frmLeaderboard
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.ClientSize = New System.Drawing.Size(534, 711)
-        Me.Controls.Add(Me.lblLBTitle)
+        Me.ClientSize = New System.Drawing.Size(612, 803)
+        Me.Controls.Add(Me.lblTitle)
         Me.Controls.Add(Me.btnBack)
         Me.Controls.Add(Me.lstLeaderboard)
+        Me.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.Name = "frmLeaderboard"
         Me.Text = "Leaderboard"
         Me.ResumeLayout(False)
@@ -78,5 +82,5 @@ Partial Class frmLeaderboard
 
     Friend WithEvents lstLeaderboard As ListBox
     Friend WithEvents btnBack As Button
-    Friend WithEvents lblLBTitle As Label
+    Friend WithEvents lblTitle As Label
 End Class
