@@ -123,39 +123,25 @@ Public Class frmMain
     End Sub
 
     Private Sub revealEmpty(x As Integer, y As Integer)
-        Dim stack As New Stack(Of Point)
-        stack.Push(New Point(x, y))
+        If x < 0 OrElse x >= gridSize OrElse y < 0 OrElse y >= gridSize Then Return
+        If Not arrButtons(x, y).Enabled Then Return
 
-        While stack.Count > 0
-            Dim current As Point = stack.Pop()
-            x = current.X
-            y = current.Y
+        arrButtons(x, y).Enabled = False
+        uncoveredTiles += 1
 
-            If Not arrButtons(x, y).Enabled Then
-                Continue While
-            End If
+        Dim adjacentMines As Integer = calcAdjacent(x, y)
 
-            arrButtons(x, y).Enabled = False
-            uncoveredTiles += 1
-
-            Dim adjacentMines As Integer = calcAdjacent(x, y)
-
-            If adjacentMines > 0 Then
-                arrButtons(x, y).Text = adjacentMines.ToString()
-            Else
-                For a As Integer = -1 To 1
-                    For b As Integer = -1 To 1
-                        Dim newX As Integer = x + a
-                        Dim newY As Integer = y + b
-
-                        If newX >= 0 AndAlso newX < gridSize AndAlso newY >= 0 AndAlso newY < gridSize Then
-                            stack.Push(New Point(newX, newY))
-                        End If
-                    Next
+        If adjacentMines > 0 Then
+            arrButtons(x, y).Text = adjacentMines.ToString()
+        Else
+            For a As Integer = -1 To 1
+                For b As Integer = -1 To 1
+                    revealEmpty(x + a, y + b)
                 Next
-            End If
-        End While
+            Next
+        End If
     End Sub
+
 
     Private Function calcAdjacent(x As Integer, y As Integer) As Integer
         Dim count As Integer = 0
