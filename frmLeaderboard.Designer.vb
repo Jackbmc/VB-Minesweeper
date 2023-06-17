@@ -34,16 +34,16 @@ Partial Class frmLeaderboard
         Me.lstLeaderboard.Font = New System.Drawing.Font("Unispace", 13.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point)
         Me.lstLeaderboard.FormattingEnabled = True
         Me.lstLeaderboard.ItemHeight = 28
-        Me.lstLeaderboard.Location = New System.Drawing.Point(90, 89)
+        Me.lstLeaderboard.Location = New System.Drawing.Point(120, 85)
         Me.lstLeaderboard.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.lstLeaderboard.Name = "lstLeaderboard"
-        Me.lstLeaderboard.Size = New System.Drawing.Size(450, 616)
+        Me.lstLeaderboard.Size = New System.Drawing.Size(450, 700)
         Me.lstLeaderboard.TabIndex = 0
         '
         'btnBack
         '
         Me.btnBack.Font = New System.Drawing.Font("Unispace", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point)
-        Me.btnBack.Location = New System.Drawing.Point(514, 759)
+        Me.btnBack.Location = New System.Drawing.Point(584, 809)
         Me.btnBack.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.btnBack.Name = "btnBack"
         Me.btnBack.Size = New System.Drawing.Size(86, 31)
@@ -56,7 +56,7 @@ Partial Class frmLeaderboard
         Me.lblTitle.AutoSize = True
         Me.lblTitle.Font = New System.Drawing.Font("Unispace", 36.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point)
         Me.lblTitle.ForeColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(3, Byte), Integer), CType(CType(217, Byte), Integer))
-        Me.lblTitle.Location = New System.Drawing.Point(90, 9)
+        Me.lblTitle.Location = New System.Drawing.Point(133, 9)
         Me.lblTitle.Name = "lblTitle"
         Me.lblTitle.Size = New System.Drawing.Size(437, 72)
         Me.lblTitle.TabIndex = 2
@@ -68,7 +68,7 @@ Partial Class frmLeaderboard
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.ClientSize = New System.Drawing.Size(612, 803)
+        Me.ClientSize = New System.Drawing.Size(682, 853)
         Me.Controls.Add(Me.lblTitle)
         Me.Controls.Add(Me.btnBack)
         Me.Controls.Add(Me.lstLeaderboard)

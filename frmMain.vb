@@ -5,116 +5,118 @@ Public Class frmMain
     Dim buttons(gridSize - 1, gridSize - 1) As Button
     Dim mines(gridSize - 1, gridSize - 1) As Boolean
     Dim uncoveredTiles As Integer
-    Dim gameTimer As Timer
-    Dim restartCooldown As DateTime
+    Dim timGame As Timer
+    Dim pName As String
+    Dim time As String = "00:00:00"
 
     Private Sub frmMain(sender As Object, e As EventArgs) Handles MyBase.Load
-        InitialiseButtons()
+        initialiseButtons()
         btnStart.Text = "Start"
     End Sub
 
-    Private Sub InitialiseButtons()
-        For x As Integer = 0 To gridSize - 1
-            For y As Integer = 0 To gridSize - 1
-                Dim newButton As New Button With {
+    Private Sub initialiseButtons()
+        Dim x As Integer
+        Dim y As Integer
+        For x = 0 To gridSize - 1
+            For y = 0 To gridSize - 1
+                Dim btnTile As New Button With {
                     .Size = New Size(35, 35),
                     .Location = New Point(35 * x, 35 * y)
                 }
-                AddHandler newButton.MouseUp, AddressOf Button_MouseUp
-                pnlGrid.Controls.Add(newButton)
-                buttons(x, y) = newButton
-            Next
-        Next
+                AddHandler btnTile.MouseUp, AddressOf Button_MouseUp
+                pnlGrid.Controls.Add(btnTile)
+                buttons(x, y) = btnTile
+            Next y
+        Next x
     End Sub
 
     Private Sub btnStart_Click(sender As Object, e As EventArgs) Handles btnStart.Click
-        If txtName.Text.Length <> 3 Then
+        pName = txtName.Text
+        If pName.Length <> 3 Then
             MessageBox.Show("Username must be 3 characters long.")
             Return
         End If
 
-        If btnStart.Text = "Restart" AndAlso DateTime.Now < restartCooldown.AddSeconds(1) Then
-            MessageBox.Show("Please wait 1 seconds before restarting.")
-            Return
-        End If
+        time = "00:00:00"
+        lblTime.Text = time
 
-        lblTime.Text = "00:00:00" ' Reset the timer to 0
-
-        InitialiseMines()
+        initialiseMines()
         uncoveredTiles = 0
 
-        If gameTimer Is Nothing Then
-            gameTimer = New Timer With {.Interval = 1000}
-            AddHandler gameTimer.Tick, AddressOf GameTimer_Tick
+        If timGame Is Nothing Then
+            timGame = New Timer With {.Interval = 1000}
+            AddHandler timGame.Tick, AddressOf timGame_Tick
         End If
 
-        gameTimer.Start()
+        timGame.Start()
         btnStart.Text = "Restart"
     End Sub
 
-    Private Sub InitialiseMines()
-        Dim rnd As New Random()
+    Private Sub initialiseMines()
+        Dim random As New Random()
 
         ' Clear the mines array
         For x As Integer = 0 To gridSize - 1
             For y As Integer = 0 To gridSize - 1
                 mines(x, y) = False
-            Next
-        Next
+            Next y
+        Next x
 
         ' Set the location of the mines
         For i As Integer = 1 To mineCount
             Dim x, y As Integer
             Do
-                x = rnd.Next(gridSize)
-                y = rnd.Next(gridSize)
+                x = random.Next(gridSize)
+                y = random.Next(gridSize)
             Loop While mines(x, y)
 
             mines(x, y) = True
-        Next
+        Next i
 
         For x As Integer = 0 To gridSize - 1
             For y As Integer = 0 To gridSize - 1
                 buttons(x, y).Enabled = True
                 buttons(x, y).Text = ""
-            Next
-        Next
+            Next y
+        Next x
     End Sub
 
-    Private Sub GameTimer_Tick(sender As Object, e As EventArgs)
-        lblTime.Text = TimeSpan.FromSeconds(TimeSpan.Parse(lblTime.Text).TotalSeconds + 1).ToString()
+    Private Sub timGame_Tick(sender As Object, e As EventArgs)
+        time = TimeSpan.FromSeconds(TimeSpan.Parse(lblTime.Text).TotalSeconds + 1).ToString()
+        lblTime.Text = time
     End Sub
 
     Private Sub Button_MouseUp(sender As Object, e As MouseEventArgs)
-        If gameTimer Is Nothing OrElse Not gameTimer.Enabled Then
-            MessageBox.Show($"Please enter a name and press 'Start'.")
-            Return
+        If timGame Is Nothing OrElse Not timGame.Enabled Then
+            MessageBox.Show("Please enter a name and press 'Start'.")
         End If
 
         Dim clickedButton As Button = CType(sender, Button)
-        Dim x, y As Integer
-        GetButtonPosition(clickedButton, x, y)
+        Dim x As Integer
+        Dim y As Integer
+        getPos(clickedButton, x, y)
 
         If e.Button = MouseButtons.Left Then
             If mines(x, y) Then
-                gameTimer.Stop()
-                restartCooldown = DateTime.Now
+                timGame.Stop()
                 MessageBox.Show($"Game over! You lost in {lblTime.Text}.")
             Else
-                RevealEmptyCells(x, y)
+                revealEmpty(x, y)
             End If
-        ElseIf e.Button = MouseButtons.Right Then
+        End If
+
+        If e.Button = MouseButtons.Right Then
             clickedButton.Text = If(clickedButton.Text = "", "F", "")
         End If
 
-        If gridSize * gridSize - uncoveredTiles = mineCount Then
-            gameTimer.Stop()
-            SavePlayerResult(txtName.Text, lblTime.Text)
+        If (gridSize * gridSize - uncoveredTiles) = mineCount Then
+            timGame.Stop()
+            saveScore(pName, time)
             MessageBox.Show($"Congratulations! You won in {lblTime.Text}.")
         End If
     End Sub
 
-    Private Sub RevealEmptyCells(x As Integer, y As Integer)
+    Private Sub revealEmpty(x As Integer, y As Integer)
         Dim stack As New Stack(Of Point)
         stack.Push(New Point(x, y))
 
@@ -166,7 +168,7 @@ Public Class frmMain
         Return count
     End Function
 
-    Private Sub GetButtonPosition(clickedButton As Button, ByRef x As Integer, ByRef y As Integer)
+    Private Sub getPos(clickedButton As Button, ByRef x As Integer, ByRef y As Integer)
         For i As Integer = 0 To gridSize - 1
             For j As Integer = 0 To gridSize - 1
                 If buttons(i, j) Is clickedButton Then
@@ -178,7 +180,7 @@ Public Class frmMain
         Next
     End Sub
 
-    Private Sub SavePlayerResult(username As String, time As String)
+    Private Sub saveScore(username As String, time As String)
         Dim filepath As String = "lb.txt"
         Dim scores As New List(Of String)
 
@@ -202,7 +204,6 @@ Public Class frmMain
         Me.Hide()
     End Sub
     Private Sub btnLeaderboard_Click(sender As Object, e As EventArgs) Handles btnLeaderboard.Click
-        refreshLB()
         frmLeaderboard.Show()
         Me.Hide()
     End Sub
