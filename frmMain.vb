@@ -2,16 +2,18 @@
 Public Class frmMain
     Const gridSize As Integer = 10
     Dim mineCount As Integer = 10
-    Dim buttons(gridSize - 1, gridSize - 1) As Button
-    Dim mines(gridSize - 1, gridSize - 1) As Boolean
+    Dim arrButtons(gridSize - 1, gridSize - 1) As Button
+    Dim arrMines(gridSize - 1, gridSize - 1) As Boolean
     Dim uncoveredTiles As Integer
     Dim timGame As Timer
     Dim pName As String
     Dim time As String = "00:00:00"
+    Dim sbState As String
 
     Private Sub frmMain(sender As Object, e As EventArgs) Handles MyBase.Load
         initialiseButtons()
         btnStart.Text = "Start"
+        sbState = btnStart.Text
     End Sub
 
     Private Sub initialiseButtons()
@@ -25,7 +27,7 @@ Public Class frmMain
                 }
                 AddHandler btnTile.MouseUp, AddressOf Button_MouseUp
                 pnlGrid.Controls.Add(btnTile)
-                buttons(x, y) = btnTile
+                arrButtons(x, y) = btnTile
             Next y
         Next x
     End Sub
@@ -50,6 +52,7 @@ Public Class frmMain
 
         timGame.Start()
         btnStart.Text = "Restart"
+        sbState = btnStart.Text
     End Sub
 
     Private Sub initialiseMines()
@@ -58,7 +61,7 @@ Public Class frmMain
         ' Clear the mines array
         For x As Integer = 0 To gridSize - 1
             For y As Integer = 0 To gridSize - 1
-                mines(x, y) = False
+                arrMines(x, y) = False
             Next y
         Next x
 
@@ -68,15 +71,15 @@ Public Class frmMain
             Do
                 x = random.Next(gridSize)
                 y = random.Next(gridSize)
-            Loop While mines(x, y)
+            Loop While arrMines(x, y)
 
-            mines(x, y) = True
+            arrMines(x, y) = True
         Next i
 
         For x As Integer = 0 To gridSize - 1
             For y As Integer = 0 To gridSize - 1
-                buttons(x, y).Enabled = True
-                buttons(x, y).Text = ""
+                arrButtons(x, y).Enabled = True
+                arrButtons(x, y).Text = ""
             Next y
         Next x
     End Sub
@@ -88,7 +91,7 @@ Public Class frmMain
 
     Private Sub Button_MouseUp(sender As Object, e As MouseEventArgs)
         If timGame Is Nothing OrElse Not timGame.Enabled Then
-            MessageBox.Show("Please enter a name and press 'Start'.")
+            MessageBox.Show("Please enter a name and press " & "'" & sbState & "'.")
         End If
 
         Dim clickedButton As Button = CType(sender, Button)
@@ -97,7 +100,7 @@ Public Class frmMain
         getPos(clickedButton, x, y)
 
         If e.Button = MouseButtons.Left Then
-            If mines(x, y) Then
+            If arrMines(x, y) Then
                 timGame.Stop()
                 MessageBox.Show($"Game over! You lost in {lblTime.Text}.")
             Else
@@ -125,22 +128,22 @@ Public Class frmMain
             x = current.X
             y = current.Y
 
-            If Not buttons(x, y).Enabled Then
+            If Not arrButtons(x, y).Enabled Then
                 Continue While
             End If
 
-            buttons(x, y).Enabled = False
+            arrButtons(x, y).Enabled = False
             uncoveredTiles += 1
 
-            Dim adjacentMines As Integer = CountAdjacentMines(x, y)
+            Dim adjacentMines As Integer = calcAdjacent(x, y)
 
             If adjacentMines > 0 Then
-                buttons(x, y).Text = adjacentMines.ToString()
+                arrButtons(x, y).Text = adjacentMines.ToString()
             Else
-                For i As Integer = -1 To 1
-                    For j As Integer = -1 To 1
-                        Dim newX As Integer = x + i
-                        Dim newY As Integer = y + j
+                For a As Integer = -1 To 1
+                    For b As Integer = -1 To 1
+                        Dim newX As Integer = x + a
+                        Dim newY As Integer = y + b
 
                         If newX >= 0 AndAlso newX < gridSize AndAlso newY >= 0 AndAlso newY < gridSize Then
                             stack.Push(New Point(newX, newY))
@@ -151,15 +154,15 @@ Public Class frmMain
         End While
     End Sub
 
-    Private Function CountAdjacentMines(x As Integer, y As Integer) As Integer
+    Private Function calcAdjacent(x As Integer, y As Integer) As Integer
         Dim count As Integer = 0
 
-        For i As Integer = -1 To 1
-            For j As Integer = -1 To 1
-                Dim newX As Integer = x + i
-                Dim newY As Integer = y + j
+        For a As Integer = -1 To 1
+            For b As Integer = -1 To 1
+                Dim newX As Integer = x + a
+                Dim newY As Integer = y + b
 
-                If newX >= 0 AndAlso newX < gridSize AndAlso newY >= 0 AndAlso newY < gridSize AndAlso mines(newX, newY) Then
+                If newX >= 0 AndAlso newX < gridSize AndAlso newY >= 0 AndAlso newY < gridSize AndAlso arrMines(newX, newY) Then
                     count += 1
                 End If
             Next
@@ -169,11 +172,11 @@ Public Class frmMain
     End Function
 
     Private Sub getPos(clickedButton As Button, ByRef x As Integer, ByRef y As Integer)
-        For i As Integer = 0 To gridSize - 1
-            For j As Integer = 0 To gridSize - 1
-                If buttons(i, j) Is clickedButton Then
-                    x = i
-                    y = j
+        For a As Integer = 0 To gridSize - 1
+            For b As Integer = 0 To gridSize - 1
+                If arrButtons(a, b) Is clickedButton Then
+                    x = a
+                    y = b
                     Exit Sub
                 End If
             Next

@@ -1,7 +1,6 @@
 ﻿Imports Microsoft.VisualBasic.FileSystem
 Imports System.IO
 Public Class frmLeaderboard
-
     Public Structure recHighScore
         Public name As String
         Public score As String
@@ -27,9 +26,9 @@ Public Class frmLeaderboard
             Dim i As Integer = 1
             While Not EOF(1)
                 FileSystem.Input(1, arrHighScores(i).name)
-                    FileSystem.Input(1, arrHighScores(i).score)
-                    lstLeaderboard.Items.Add($"{arrHighScores(i).name}: {arrHighScores(i).score}")
-                    i += 1
+                FileSystem.Input(1, arrHighScores(i).score)
+                lstLeaderboard.Items.Add($"{arrHighScores(i).name}: {arrHighScores(i).score}")
+                i += 1
             End While
 
             FileSystem.FileClose(1)
