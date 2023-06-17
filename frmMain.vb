@@ -9,6 +9,7 @@ Public Class frmMain
     Dim pName As String
     Dim time As String = "00:00:00"
     Dim sbState As String
+    Dim gameLocked As Boolean = True
 
     Private Sub frmMain(sender As Object, e As EventArgs) Handles MyBase.Load
         initialiseButtons()
@@ -53,6 +54,7 @@ Public Class frmMain
         timGame.Start()
         btnStart.Text = "Restart"
         sbState = btnStart.Text
+        gameLocked = False
     End Sub
 
     Private Sub initialiseMines()
@@ -99,16 +101,17 @@ Public Class frmMain
         Dim y As Integer
         getPos(clickedButton, x, y)
 
-        If e.Button = MouseButtons.Left Then
+        If e.Button = MouseButtons.Left And gameLocked = False Then
             If arrMines(x, y) Then
                 timGame.Stop()
                 MessageBox.Show($"Game over! You lost in {lblTime.Text}.")
+                gameLocked = True
             Else
                 revealEmpty(x, y)
             End If
         End If
 
-        If e.Button = MouseButtons.Right Then
+        If e.Button = MouseButtons.Right And gameLocked = False Then
             clickedButton.Text = If(clickedButton.Text = "", "F", "")
         End If
 
