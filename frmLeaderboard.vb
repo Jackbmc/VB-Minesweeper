@@ -6,7 +6,7 @@ Public Class frmLeaderboard
         Public score As String
     End Structure
 
-    Dim arrHighScores(6) As recHighScore
+    Dim arrHighScores(10) As recHighScore
 
     Private Sub frmLeaderboard_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         loadLB()
