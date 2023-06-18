@@ -22,6 +22,7 @@ Partial Class frmMain
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMain))
         Me.pnlGrid = New System.Windows.Forms.Panel()
         Me.btnLeaderboard = New System.Windows.Forms.Button()
         Me.txtName = New System.Windows.Forms.TextBox()
@@ -35,10 +36,10 @@ Partial Class frmMain
         '
         'pnlGrid
         '
-        Me.pnlGrid.Location = New System.Drawing.Point(69, 238)
+        Me.pnlGrid.Location = New System.Drawing.Point(105, 227)
         Me.pnlGrid.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.pnlGrid.Name = "pnlGrid"
-        Me.pnlGrid.Size = New System.Drawing.Size(550, 550)
+        Me.pnlGrid.Size = New System.Drawing.Size(500, 500)
         Me.pnlGrid.TabIndex = 5
         '
         'btnLeaderboard
@@ -128,9 +129,10 @@ Partial Class frmMain
         Me.Controls.Add(Me.btnStart)
         Me.Controls.Add(Me.txtName)
         Me.Controls.Add(Me.pnlGrid)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.Name = "frmMain"
-        Me.Text = "Main"
+        Me.Text = "Minesweeper"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

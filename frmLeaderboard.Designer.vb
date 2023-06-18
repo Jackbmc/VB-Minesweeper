@@ -22,6 +22,7 @@ Partial Class frmLeaderboard
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmLeaderboard))
         Me.lstLeaderboard = New System.Windows.Forms.ListBox()
         Me.btnBack = New System.Windows.Forms.Button()
         Me.lblTitle = New System.Windows.Forms.Label()
@@ -72,6 +73,7 @@ Partial Class frmLeaderboard
         Me.Controls.Add(Me.lblTitle)
         Me.Controls.Add(Me.btnBack)
         Me.Controls.Add(Me.lstLeaderboard)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.Name = "frmLeaderboard"
         Me.Text = "Leaderboard"
