@@ -1,4 +1,5 @@
-﻿Imports System.IO
+﻿Imports System.Collections.Specialized
+Imports System.IO
 Public Class frmMain
     Const gridSize As Integer = 10
     Dim mineCount As Integer = 10
@@ -36,32 +37,31 @@ Public Class frmMain
     Private Sub btnStart_Click(sender As Object, e As EventArgs) Handles btnStart.Click
         'what this sub does
         pName = txtName.Text
-        If pName.Length <> 3 Then
+        Dim nameVal As Boolean = validateName(pName)
+        If nameVal = False Then
             MsgBox("Username must be 3 characters long.")
-            Return
+        Else
+            time = "00:00:00"
+            lblTime.Text = time
+
+            initialiseMines()
+            uncoveredTiles = 0
+
+            'check ----
+            If timGame Is Nothing Then
+                timGame = New Timer With {.Interval = 1000}
+                AddHandler timGame.Tick, AddressOf timGame_Tick
+            End If
+
+            timGame.Start()
+            btnStart.Text = "Restart"
+            sbState = btnStart.Text
+            gameLocked = False
         End If
-
-        time = "00:00:00"
-        lblTime.Text = time
-
-        initialiseMines()
-        uncoveredTiles = 0
-
-        'check ----
-        If timGame Is Nothing Then
-            timGame = New Timer With {.Interval = 1000}
-            AddHandler timGame.Tick, AddressOf timGame_Tick
-        End If
-
-        timGame.Start()
-        btnStart.Text = "Restart"
-        sbState = btnStart.Text
-        gameLocked = False
     End Sub
 
     Private Function validateName(pName As String) As Boolean
-        Dim result As Boolean
-        result = True
+        Dim result As Boolean = True
         If pName.Length <> 3 Then
             result = False
         End If
