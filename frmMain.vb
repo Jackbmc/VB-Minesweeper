@@ -34,6 +34,7 @@ Public Class frmMain
     End Sub
 
     Private Sub btnStart_Click(sender As Object, e As EventArgs) Handles btnStart.Click
+        'what this sub does
         pName = txtName.Text
         If pName.Length <> 3 Then
             MsgBox("Username must be 3 characters long.")
@@ -46,6 +47,7 @@ Public Class frmMain
         initialiseMines()
         uncoveredTiles = 0
 
+        'check ----
         If timGame Is Nothing Then
             timGame = New Timer With {.Interval = 1000}
             AddHandler timGame.Tick, AddressOf timGame_Tick
@@ -56,6 +58,15 @@ Public Class frmMain
         sbState = btnStart.Text
         gameLocked = False
     End Sub
+
+    Private Function validateName(pName As String) As Boolean
+        Dim result As Boolean
+        result = True
+        If pName.Length <> 3 Then
+            result = False
+        End If
+        Return result
+    End Function
 
     Private Sub initialiseMines()
         Dim random As New Random()
@@ -68,10 +79,10 @@ Public Class frmMain
 
         For i As Integer = 1 To mineCount
             Dim x, y As Integer
-            Do
+            While arrMines(x, y) = True
                 x = random.Next(gridSize)
                 y = random.Next(gridSize)
-            Loop While arrMines(x, y)
+            End While
 
             arrMines(x, y) = True
         Next i
@@ -100,7 +111,7 @@ Public Class frmMain
         getPos(clickedButton, x, y)
 
         If e.Button = MouseButtons.Left And gameLocked = False Then
-            If arrMines(x, y) Then
+            If arrMines(x, y) = True Then
                 timGame.Stop()
                 MsgBox($"Game over! You lost in " & lblTime.Text & ".")
                 gameLocked = True
@@ -132,11 +143,11 @@ Public Class frmMain
         If adjacentMines > 0 Then
             arrButtons(x, y).Text = adjacentMines.ToString()
         Else
-            For a As Integer = -1 To 1
-                For b As Integer = -1 To 1
-                    revealEmpty(x + a, y + b)
-                Next
-            Next
+            For xShift As Integer = -1 To 1
+                For yShift As Integer = -1 To 1
+                    revealEmpty(x + xShift, y + yShift)
+                Next yShift
+            Next xShift
         End If
     End Sub
 
@@ -144,30 +155,30 @@ Public Class frmMain
     Private Function calcAdjacent(x As Integer, y As Integer) As Integer
         Dim count As Integer = 0
 
-        For a As Integer = -1 To 1
-            For b As Integer = -1 To 1
-                Dim newX As Integer = x + a
-                Dim newY As Integer = y + b
+        For xShift As Integer = -1 To 1
+            For yShift As Integer = -1 To 1
+                Dim newX As Integer = x + xShift
+                Dim newY As Integer = y + yShift
 
-                If newX >= 0 AndAlso newX < gridSize AndAlso newY >= 0 AndAlso newY < gridSize AndAlso arrMines(newX, newY) Then
+                If newX >= 0 AndAlso newX < gridSize AndAlso newY >= 0 AndAlso newY < gridSize AndAlso arrMines(newX, newY) = True Then
                     count += 1
                 End If
-            Next
-        Next
+            Next yShift
+        Next xShift
 
         Return count
     End Function
 
     Private Sub getPos(clickedButton As Button, ByRef x As Integer, ByRef y As Integer)
-        For a As Integer = 0 To gridSize - 1
-            For b As Integer = 0 To gridSize - 1
-                If arrButtons(a, b) Is clickedButton Then
-                    x = a
-                    y = b
+        For xShift As Integer = 0 To gridSize - 1
+            For yShift As Integer = 0 To gridSize - 1
+                If arrButtons(xShift, yShift) Is clickedButton Then
+                    x = xShift
+                    y = yShift
                     Exit Sub
                 End If
-            Next
-        Next
+            Next yShift
+        Next xShift
     End Sub
 
     Private Sub saveScore(username As String, time As String)
@@ -191,7 +202,12 @@ Public Class frmMain
     End Sub
 
     Private Sub btnHelp_Click(sender As Object, e As EventArgs) Handles btnHelp.Click
-        'OPEN PDF OF THE USER GUIDE
+        'Opens a PDF of the user guide when the user clicks the "?" button. Credit to Kaelen Sorenson for the code.
+        Dim openPDF As New Process
+        openPDF.StartInfo.UseShellExecute = True
+        openPDF.StartInfo.WorkingDirectory = Application.StartupPath
+        openPDF.StartInfo.FileName = "UserGuide.pdf"
+        openPDF.Start()
     End Sub
     Private Sub btnLeaderboard_Click(sender As Object, e As EventArgs) Handles btnLeaderboard.Click
         frmLeaderboard.Show()

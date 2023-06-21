@@ -36,19 +36,17 @@ Partial Class frmMain
         '
         'pnlGrid
         '
-        Me.pnlGrid.Location = New System.Drawing.Point(105, 227)
-        Me.pnlGrid.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.pnlGrid.Location = New System.Drawing.Point(92, 170)
         Me.pnlGrid.Name = "pnlGrid"
-        Me.pnlGrid.Size = New System.Drawing.Size(500, 500)
+        Me.pnlGrid.Size = New System.Drawing.Size(438, 375)
         Me.pnlGrid.TabIndex = 5
         '
         'btnLeaderboard
         '
         Me.btnLeaderboard.Font = New System.Drawing.Font("Unispace", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point)
-        Me.btnLeaderboard.Location = New System.Drawing.Point(499, 809)
-        Me.btnLeaderboard.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.btnLeaderboard.Location = New System.Drawing.Point(437, 607)
         Me.btnLeaderboard.Name = "btnLeaderboard"
-        Me.btnLeaderboard.Size = New System.Drawing.Size(171, 31)
+        Me.btnLeaderboard.Size = New System.Drawing.Size(150, 23)
         Me.btnLeaderboard.TabIndex = 6
         Me.btnLeaderboard.Text = "Leaderboard"
         Me.btnLeaderboard.UseVisualStyleBackColor = True
@@ -56,20 +54,18 @@ Partial Class frmMain
         'txtName
         '
         Me.txtName.Font = New System.Drawing.Font("Unispace", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point)
-        Me.txtName.Location = New System.Drawing.Point(54, 153)
-        Me.txtName.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.txtName.Location = New System.Drawing.Point(47, 115)
         Me.txtName.Name = "txtName"
         Me.txtName.PlaceholderText = "Name"
-        Me.txtName.Size = New System.Drawing.Size(114, 31)
+        Me.txtName.Size = New System.Drawing.Size(100, 27)
         Me.txtName.TabIndex = 7
         '
         'btnStart
         '
         Me.btnStart.Font = New System.Drawing.Font("Unispace", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point)
-        Me.btnStart.Location = New System.Drawing.Point(270, 153)
-        Me.btnStart.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.btnStart.Location = New System.Drawing.Point(236, 115)
         Me.btnStart.Name = "btnStart"
-        Me.btnStart.Size = New System.Drawing.Size(132, 31)
+        Me.btnStart.Size = New System.Drawing.Size(116, 23)
         Me.btnStart.TabIndex = 8
         Me.btnStart.Text = "Start"
         Me.btnStart.UseVisualStyleBackColor = True
@@ -78,9 +74,9 @@ Partial Class frmMain
         '
         Me.lblTime.AutoSize = True
         Me.lblTime.Font = New System.Drawing.Font("Unispace", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point)
-        Me.lblTime.Location = New System.Drawing.Point(499, 158)
+        Me.lblTime.Location = New System.Drawing.Point(437, 118)
         Me.lblTime.Name = "lblTime"
-        Me.lblTime.Size = New System.Drawing.Size(106, 24)
+        Me.lblTime.Size = New System.Drawing.Size(89, 19)
         Me.lblTime.TabIndex = 9
         Me.lblTime.Text = "00:00:00"
         '
@@ -88,9 +84,9 @@ Partial Class frmMain
         '
         Me.lblDisclaimer.AutoSize = True
         Me.lblDisclaimer.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point)
-        Me.lblDisclaimer.Location = New System.Drawing.Point(211, 209)
+        Me.lblDisclaimer.Location = New System.Drawing.Point(185, 157)
         Me.lblDisclaimer.Name = "lblDisclaimer"
-        Me.lblDisclaimer.Size = New System.Drawing.Size(0, 25)
+        Me.lblDisclaimer.Size = New System.Drawing.Size(0, 20)
         Me.lblDisclaimer.TabIndex = 12
         '
         'lblTitle
@@ -98,9 +94,9 @@ Partial Class frmMain
         Me.lblTitle.AutoSize = True
         Me.lblTitle.Font = New System.Drawing.Font("Unispace", 36.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point)
         Me.lblTitle.ForeColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(3, Byte), Integer), CType(CType(217, Byte), Integer))
-        Me.lblTitle.Location = New System.Drawing.Point(111, 9)
+        Me.lblTitle.Location = New System.Drawing.Point(97, 7)
         Me.lblTitle.Name = "lblTitle"
-        Me.lblTitle.Size = New System.Drawing.Size(437, 72)
+        Me.lblTitle.Size = New System.Drawing.Size(344, 58)
         Me.lblTitle.TabIndex = 13
         Me.lblTitle.Text = "MINESWEEPER"
         Me.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -108,19 +104,19 @@ Partial Class frmMain
         'btnHelp
         '
         Me.btnHelp.Font = New System.Drawing.Font("Unispace", 13.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point)
-        Me.btnHelp.Location = New System.Drawing.Point(641, 13)
-        Me.btnHelp.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.btnHelp.Location = New System.Drawing.Point(561, 10)
         Me.btnHelp.Name = "btnHelp"
-        Me.btnHelp.Size = New System.Drawing.Size(29, 33)
+        Me.btnHelp.Size = New System.Drawing.Size(25, 25)
         Me.btnHelp.TabIndex = 14
         Me.btnHelp.Text = "?"
         Me.btnHelp.UseVisualStyleBackColor = True
         '
         'frmMain
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 20.0!)
+        Me.AcceptButton = Me.btnStart
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(682, 853)
+        Me.ClientSize = New System.Drawing.Size(597, 640)
         Me.Controls.Add(Me.btnLeaderboard)
         Me.Controls.Add(Me.btnHelp)
         Me.Controls.Add(Me.lblTitle)
@@ -130,7 +126,6 @@ Partial Class frmMain
         Me.Controls.Add(Me.txtName)
         Me.Controls.Add(Me.pnlGrid)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-        Me.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.Name = "frmMain"
         Me.Text = "Minesweeper"
         Me.ResumeLayout(False)
