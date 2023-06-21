@@ -36,7 +36,7 @@ Public Class frmMain
     Private Sub btnStart_Click(sender As Object, e As EventArgs) Handles btnStart.Click
         pName = txtName.Text
         If pName.Length <> 3 Then
-            MessageBox.Show("Username must be 3 characters long.")
+            MsgBox("Username must be 3 characters long.")
             Return
         End If
 
@@ -60,14 +60,12 @@ Public Class frmMain
     Private Sub initialiseMines()
         Dim random As New Random()
 
-        ' Clear the mines array
         For x As Integer = 0 To gridSize - 1
             For y As Integer = 0 To gridSize - 1
                 arrMines(x, y) = False
             Next y
         Next x
 
-        ' Set the location of the mines
         For i As Integer = 1 To mineCount
             Dim x, y As Integer
             Do
@@ -93,7 +91,7 @@ Public Class frmMain
 
     Private Sub Button_MouseUp(sender As Object, e As MouseEventArgs)
         If timGame Is Nothing OrElse Not timGame.Enabled Then
-            MessageBox.Show("Please enter a name and press " & "'" & sbState & "'.")
+            MsgBox("Please enter a name and press " & "'" & sbState & "'.")
         End If
 
         Dim clickedButton As Button = CType(sender, Button)
@@ -104,7 +102,7 @@ Public Class frmMain
         If e.Button = MouseButtons.Left And gameLocked = False Then
             If arrMines(x, y) Then
                 timGame.Stop()
-                MessageBox.Show($"Game over! You lost in {lblTime.Text}.")
+                MsgBox($"Game over! You lost in " & lblTime.Text & ".")
                 gameLocked = True
             Else
                 revealEmpty(x, y)
@@ -118,7 +116,7 @@ Public Class frmMain
         If (gridSize * gridSize - uncoveredTiles) = mineCount Then
             timGame.Stop()
             saveScore(pName, time)
-            MessageBox.Show($"Congratulations! You won in {lblTime.Text}.")
+            MsgBox($"Congratulations! You won in " & lblTime.Text & ".")
         End If
     End Sub
 
@@ -180,7 +178,7 @@ Public Class frmMain
             scores = File.ReadAllLines(filepath).ToList()
         End If
 
-        Dim playerScore As String = $"{username},{time}"
+        Dim playerScore As String = username & "," & time
         scores.Add(playerScore)
 
         scores = scores.OrderBy(Function(score) TimeSpan.Parse(score.Split(",")(1))).ToList()
@@ -193,7 +191,7 @@ Public Class frmMain
     End Sub
 
     Private Sub btnHelp_Click(sender As Object, e As EventArgs) Handles btnHelp.Click
-        Me.Hide()
+        'OPEN PDF OF THE USER GUIDE
     End Sub
     Private Sub btnLeaderboard_Click(sender As Object, e As EventArgs) Handles btnLeaderboard.Click
         frmLeaderboard.Show()
