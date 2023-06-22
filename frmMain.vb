@@ -12,7 +12,6 @@ Public Class frmMain
     Dim sbState As String
     Dim gameLocked As Boolean = True
 
-
     Private Sub frmMain(sender As Object, e As EventArgs) Handles MyBase.Load
         'Calls the initialise buttons subroutine to place the buttons and updates the start/restart button
         initialiseButtons()
@@ -184,7 +183,6 @@ Public Class frmMain
             End If
         End If
     End Sub
-
 
     Private Function calcAdjacent(x As Integer, y As Integer) As Integer
         'Calculates the number of adjacent mines by recursively checking surrounding tiles.
